@@ -1,8 +1,11 @@
 import * as fs from "fs";
 import * as readline from "readline";
+<<<<<<< HEAD
 import{z, ZodType} from "zod";
 /* z for main zod namespace
 /* Zodtype for the base type of all zod schemas.
+=======
+>>>>>>> fbfd3f0e3c288d9d0a5d814877ec2e7ac83f99bd
 
 /**
  * This is a JSDoc comment. Similar to JavaDoc, it documents a public-facing
@@ -17,7 +20,11 @@ import{z, ZodType} from "zod";
  * @param path The path to the file being loaded.
  * @returns a "promise" to produce a 2-d array of cell values
  */
+<<<<<<< HEAD
 export async function parseCSV<T>(path: string, schema?: ZodType<T> ): Promise<T[] | string[][]> {
+=======
+export async function parseCSV(path: string): Promise<string[][]> {
+>>>>>>> fbfd3f0e3c288d9d0a5d814877ec2e7ac83f99bd
   // This initial block of code reads from a file in Node.js. The "rl"
   // value can be iterated over in a "for" loop. 
   const fileStream = fs.createReadStream(path);
@@ -27,13 +34,18 @@ export async function parseCSV<T>(path: string, schema?: ZodType<T> ): Promise<T
   });
   
   // Create an empty array to hold the results
+<<<<<<< HEAD
   let result: T[] | string[][] = [];
 
+=======
+  let result = []
+>>>>>>> fbfd3f0e3c288d9d0a5d814877ec2e7ac83f99bd
   
   // We add the "await" here because file I/O is asynchronous. 
   // We need to force TypeScript to _wait_ for a row before moving on. 
   // More on this in class soon!
   for await (const line of rl) {
+<<<<<<< HEAD
     const values = line.split(",").map((v: string) => v.trim());
 
     if (schema === undefined) {
@@ -46,6 +58,10 @@ export async function parseCSV<T>(path: string, schema?: ZodType<T> ): Promise<T
         throw new Error(`method safeParse failed on result`)
       }
     }
+=======
+    const values = line.split(",").map((v) => v.trim());
+    result.push(values)
+>>>>>>> fbfd3f0e3c288d9d0a5d814877ec2e7ac83f99bd
   }
   return result
 }

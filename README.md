@@ -3,6 +3,7 @@
 ### Task C: Proposing Enhancement
 
 - #### Step 1: Brainstorm on your own.
+<<<<<<< HEAD
     Just by taking a quick look at the current parser and the parser docs, I think that our parser is going to run into a lot of issues with more complex cells and specified usage. I wouldn't really even consider these edge cases becauae I think that anyone seriously using this parser will run into these issues. 
     This includes things like:
         - Commas in quotes or parenthesis or similar
@@ -439,6 +440,16 @@ I need to design a developer-friendly API for a TypeScript CSV parserlibrary. Wh
     **Reflection on LLM Consultation:**
     
     My initial ideas focused on obvious parsing issues like quotes and commas that I found in the CSV spec. The LLM expanded my perspective significantly by suggesting streaming APIs, dialect detection, security concerns (CSV injection), and performance optimizations that I hadn't considered. The different prompts yielded increasingly detailed responses - the first was high-level features, the second focused on error cases, and the third on API design. What resonated most was the LLM's emphasis on developer experience through clear error messages and flexible configuration, while I was initially too focused on just meeting the CSV spec. The security and performance suggestions felt premature for this basic parser. 
+=======
+
+- #### Step 2: Use an LLM to help expand your perspective.
+
+- #### Step 3: use an LLM to help expand your perspective.
+
+    Include a list of the top 4 enhancements or edge cases you think are most valuable to explore in the next week’s sprint. Label them clearly by category (extensibility vs. functionality), and include whether they came from you, the LLM, or both. Describe these using the User Story format—see below for a definition. 
+
+    Include your notes from above: what were your initial ideas, what did the LLM suggest, and how did the results differ by prompt? What resonated with you, and what didn’t? (3-5 sentences.) 
+>>>>>>> fbfd3f0e3c288d9d0a5d814877ec2e7ac83f99bd
 
 ### Design Choices
 
@@ -456,8 +467,13 @@ I need to design a developer-friendly API for a TypeScript CSV parserlibrary. Wh
 #### Team members and contributions (include cs logins):
 
 #### Collaborators (cslogins of anyone you worked with on this project and/or generative AI):
+<<<<<<< HEAD
 Used generative AI for the parts that asked for it. No other collaborators on this project.
 #### Total estimated time it took to complete project:
 
 #### Link to GitHub Repo:  
 https://github.com/cs0320-f25/typescript-csv-theodore-casares.git
+=======
+#### Total estimated time it took to complete project:
+#### Link to GitHub Repo:  
+>>>>>>> fbfd3f0e3c288d9d0a5d814877ec2e7ac83f99bd
