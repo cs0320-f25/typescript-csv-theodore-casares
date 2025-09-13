@@ -1,0 +1,61 @@
+CSCI 0320 Sprint 1 - Reflection Questions
+Theodore Casares
+
+1. Correctness
+================
+What makes a CSV parser "correct"?
+
+a CSV parser is correct when it:
+
+- accurately splits rows based on line endings while respecting quoted fields that might have newlines in them
+- properly finds field boundaries using the delimiter, but ignores delimiters that are inside quoted fields
+- handles escape sequences right, especially double quotes ("") within quoted fields which should become a single quote
+- keeps all the data intact by preserving all characters within fields, including commas, quotes, and special chars when theyre properly escaped
+- consistently handles edge cases like empty fields (both quoted and unquoted), empty rows, and files with or without trailing newlines
+- returns data in a predictable format that matches the spec (RFC 4180 or whatever is specified)
+- gives clear errors when the CSV is messed up instead of just silently corrupting data
+- preserves the type and structure of data based on any schema provided
+
+basically the parser should never lose data, mess up field boundaries, or fail without telling you why. It needs to handle all valid CSV formats according to the specification and give useful feedback on invalid inputs.
+
+2. Random, On-Demand Generation
+=================================
+How might you use random CSV data generation to expand the power of your testing?
+
+random CSV generation would let us do property-based testing where we test general rules instead of just specific examples:
+
+- roundtrip testing: generate random CSV data, parse it, turn it back into CSV, and check if we get the same thing back. this makes sure parsing and serialization work together correctly
+
+- boundary testing: generate CSVs with random special characters (quotes, commas, newlines) at different spots like field edges or row boundaries to find edge cases we wouldnt think of ourselves
+
+- schema validation: generate random data that should match a schema and check it parses right, plus data that breaks the schema in different ways to make sure errors are handled properly
+
+- performance testing: generate huge files with random data to test memory usage and see how fast it runs under stress
+
+- differential testing: parse the same random CSV with different parsers and compare to make sure theyre consistent
+
+- fuzzing for security: generate broken or malicious CSV data to test if the parser can handle attacks or crashes
+
+this would help us catch weird edge cases that regular tests might miss, especially with character encoding, escape sequences, and where fields start and end
+
+3. Overall Experience, Bugs Encountered and Resolved
+=====================================================
+
+this sprint was different from normal programming assignments in a few ways:
+
+- testing existing code instead of writing from scratch, which meant I had to think about breaking things instead of building them
+- thinking like a library developer who has to consider use cases I dont even know about yet rather than just solving one specific problem  
+- having to balance finding bugs now with planning improvements for later
+
+the main surprise was realizing how many ways a simple CSV parser can fail. what seems like basic string splitting gets really complicated when you add quotes, escapes, and multiline fields into the mix
+
+bugs I found during testing:
+- the parser doesnt handle quoted fields right - it keeps the quotes in the output instead of removing them
+- commas inside quoted fields break everything and create extra columns
+- multiline fields in quotes dont work, they just break at the newline
+- empty quoted fields ("") come back with the quotes still on them instead of as empty strings
+- the basic split(',') approach basically fails for any real CSV file
+
+I didnt fix these bugs (since we're not supposed to for sprint 1), but finding them through testing helped me understand why proper CSV parsing is actually pretty complex. writing tests systematically for each edge case helped make sure I didn't miss anything - started with obvious stuff from the spec and then added harder scenarios as I went.
+
+using TypeScript and Zod for schema validation was new to me and kinda tricky at first, but the type safety was nice for catching issues early
